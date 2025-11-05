@@ -59,7 +59,7 @@ CraftLevel::CraftLevel()
 	woodSwordImage.push_back(L"⠀⠀⠀⠀⣀⠤⠐⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
 	woodSwordImage.push_back(L"⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
 	woodSwordImage.push_back(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-	
+
 	recipeList.push_back(new Recipe("나무 몽둥이", []()
 		{
 			if (2 <= Game::Get().player->GetQuantity("목 재"))
@@ -69,7 +69,7 @@ CraftLevel::CraftLevel()
 				Game::Get().player->AddToInventory(newItem, 1);
 				system("cls");
 				Log("\t나무 몽둥이 제작 성공 ! ");
-				
+
 				if (auto* cl = dynamic_cast<CraftLevel*>(Game::Get().GetCraftLevel()))
 				{
 					SetConsoleOutputCP(CP_UTF8);
@@ -113,13 +113,24 @@ CraftLevel::CraftLevel()
 	));
 }
 
+CraftLevel::~CraftLevel()
+{
+	delete timer;
+	timer = nullptr;
+
+	for (auto recipe : recipeList)
+	{
+		delete recipe;
+	}
+}
+
 void CraftLevel::Update(float deltaTime)
 {
 	timer->Update(deltaTime);
 
 	if (Game::Get().GetKeyDown(VK_ESCAPE))
 	{
-		Game::Get().BackToMainLevel();		
+		Game::Get().BackToMainLevel();
 		bIsExpired = false;
 		timer->Reset();
 		timer->bActive = false;

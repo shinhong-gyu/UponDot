@@ -65,14 +65,14 @@ BattleScene::~BattleScene()
 	{
 		if (selection)
 		{
-			delete(selection);
+			delete selection;
 			selection = nullptr;
 		}
 	}
 
 	if (timer)
 	{
-		delete(timer);
+		delete timer;
 		timer = nullptr;
 	}
 }

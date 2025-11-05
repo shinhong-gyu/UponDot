@@ -7,3 +7,7 @@ Animal::Animal(const Vector2& position)
 
 	SetColor(Color::Red);
 }
+
+Animal::~Animal()
+{
+}

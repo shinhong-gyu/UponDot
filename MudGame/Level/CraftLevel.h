@@ -30,6 +30,7 @@ class CraftLevel : public Level
 
 public:
 	CraftLevel();
+	~CraftLevel();
 
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;

@@ -7,6 +7,11 @@ Medicine::Medicine(const char* name, Player* owner)
 	itemType = ItemType::Medicine;
 }
 
+Medicine::~Medicine()
+{
+	delete[] name;
+}
+
 void Medicine::Use()
 {
 	Engine::Get().SetCursorPosition(Vector2(14, 0));

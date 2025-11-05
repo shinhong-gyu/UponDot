@@ -12,6 +12,4 @@ Item::Item(const char* name, Player* value)
 
 Item::~Item()
 {
-	delete[] name;
-	delete owner;
 }

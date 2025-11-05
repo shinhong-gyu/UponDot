@@ -8,6 +8,8 @@ class Medicine : public Item
 
 public:
 	Medicine(const char* name, Player* owner);
+	~Medicine();
+
 	virtual void Use() override;
 private:
 };

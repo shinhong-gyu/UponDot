@@ -128,7 +128,6 @@ Game::~Game()
 
 	if (mainLevel)
 	{
-
 		delete mainLevel;
 		mainLevel = nullptr;
 		if (backLevel)
@@ -142,6 +141,11 @@ Game::~Game()
 void Game::InitGame()
 {
 	Engine::Get().ClearImage(100, 100);
+
+	if (mainLevel != nullptr)
+	{
+		delete mainLevel;
+	}
 
 	mainLevel = new MainLevel(CreateRandomMap());
 	mainLevel->bIsMainLevel = true;
@@ -238,7 +242,6 @@ void Game::IntoBattleScene()
 {
 	system("cls");
 
-	mainLevel->bIsMainLevel = false;
 
 	backLevel = &*mainLevel;
 
@@ -249,7 +252,6 @@ void Game::IntoBattleScene()
 
 	mainLevel = &*battleScene;
 
-	mainLevel->bIsMainLevel = true;
 }
 
 void Game::BackToMainLevel()
@@ -258,12 +260,12 @@ void Game::BackToMainLevel()
 
 	system("cls");
 	Engine::Get().ClearInfoUI();
-	mainLevel->bIsMainLevel = false;
 
 	if (backLevel->As<MainLevel>())
 	{
 		mainLevel = &*backLevel;
 	}
+
 	mainLevel->bIsMainLevel = true;
 }
 

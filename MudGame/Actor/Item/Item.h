@@ -16,7 +16,7 @@ class Item : public DrawableActor
 {
 	RTTI_DECLARATIONS(Item, DrawableActor)
 public:
-	Item(const char* name, Player* value=nullptr);
+	Item(const char* name, Player* value = nullptr);
 	virtual ~Item();
 
 	virtual void Use() = 0;

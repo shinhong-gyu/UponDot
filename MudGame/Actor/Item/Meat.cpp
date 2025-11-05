@@ -7,6 +7,11 @@ Meat::Meat(const char* name,Player* owner)
 	itemType = ItemType::Meat;
 }
 
+Meat::~Meat()
+{
+	delete[] name;
+}
+
 void Meat::Use()
 {
 

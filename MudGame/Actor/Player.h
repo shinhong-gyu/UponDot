@@ -30,6 +30,7 @@ public:
 	Player(const char* image = "p");
 
 	Player(const Vector2& position, const char* image = "P");
+	~Player();
 
 	virtual void Update(float deltaTime) override;
 

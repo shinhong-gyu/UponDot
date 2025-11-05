@@ -12,6 +12,11 @@ Wood::Wood(const char* name)
 	strcpy_s(this->name, length, "목 재");
 }
 
+Wood::~Wood()
+{
+	delete[] name;
+}
+
 void Wood::Use()
 {
 }

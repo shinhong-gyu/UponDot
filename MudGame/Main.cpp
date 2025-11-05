@@ -21,6 +21,7 @@ int main()
 {
 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	std::wcout.imbue(std::locale("en_US.UTF-8"));
 
 	Game game;

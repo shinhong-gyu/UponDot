@@ -9,3 +9,7 @@ Ground::Ground(const Vector2& position)
 	// 색상 지정.
 	color = Color::Brown;
 }
+
+Ground::~Ground()
+{
+}

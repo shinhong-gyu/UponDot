@@ -9,6 +9,21 @@ Level::Level()
 Level::~Level()
 {
 	// 메모리 해제.
+	for (Actor* actor : actors)
+	{
+		if (actor != nullptr)
+		{
+			delete actor;
+		}
+	}
+	actors.clear();
+
+	// 추가 요청된 액터 정리
+	if (addRequestedActor != nullptr)
+	{
+		delete addRequestedActor;
+		addRequestedActor = nullptr;
+	}
 }
 void Level::Update(float deltaTime)
 {
