@@ -5,7 +5,7 @@
 
 GameOverLevel::GameOverLevel()
 {
-	menuItems.push_back(new EndMenuItem("예", []() { Game::Get().InitGame(); }));
+	menuItems.push_back(new EndMenuItem("예", []() { Game::Get().InitGame(false); }));
 	menuItems.push_back(new EndMenuItem("아니오", []() { Game::Get().QuitGame(); }));
 
 	length = (int)menuItems.size();

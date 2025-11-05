@@ -14,7 +14,7 @@ public:
 	Game();
 	~Game();
 
-	void InitGame();
+	void InitGame(bool bFromMenu);
 
 	vector<vector<char>> CreateRandomMap();
 
@@ -42,7 +42,7 @@ public:
 
 	static Game& Get() { return *instance; }
 
-	Player* player;
+	Player* player = nullptr;
 
 private:
 	bool bShowMenu = false;

@@ -44,7 +44,7 @@ private:
 
 	bool bIsExpired = false;
 
-	Timer* timer = new Timer(2.0f);
+	Timer* timer = nullptr;
 	vector<wstring> clubImage;
 	vector<wstring> woodSwordImage;
 

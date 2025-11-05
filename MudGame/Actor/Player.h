@@ -60,7 +60,7 @@ private:
 	int hp = 8;
 	int	starve = 8;
 
-	Timer* starveTimer = new Timer(1.0f);
+	Timer* starveTimer = nullptr;
 
 	bool bGetControl = true;
 	bool bInventoryChanged = false;

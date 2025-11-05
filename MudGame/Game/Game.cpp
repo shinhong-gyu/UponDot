@@ -17,15 +17,7 @@ Game::Game()
 
 	SetCursorType(CursorType::NoCursor);
 
-	menuLevel = new MenuLevel();
-	mainLevel = new MainLevel(CreateRandomMap());
-	mainLevel->bIsMainLevel = true;
-	craftLevel = new CraftLevel();
-	gameOverLevel = new GameOverLevel();
-
-	player = mainLevel->As<MainLevel>()->player;
-
-	battleScene = new BattleScene();
+	InitGame(true);
 
 	loseImage.push_back(L"⣿⣿⣟⢿⣿⣿⡿⡿⣿⣿⡿⡻⡫⣿⣿⣿⣿⡻⣝⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⢟⣿⣿⣿⣿⣿⣿⣿⡇⠆⠕⢌⠪⡢⡹⡙⣟⢿");
 	loseImage.push_back(L"⣿⣿⣿⡪⢻⣿⡗⡕⣕⢕⡗⡝⣎⣿⣿⡿⡣⣳⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣎⡟⣿⣿⣿⣿⣿⣿⡑⢕⠱⡱⡸⡸⡸⡰⡹");
@@ -130,17 +122,31 @@ Game::~Game()
 	{
 		delete mainLevel;
 		mainLevel = nullptr;
-		if (backLevel)
-		{
-			delete backLevel;
-			backLevel = nullptr;
-		}
+	}
+
+	if (backLevel)
+	{
+		delete backLevel;
+		backLevel;
 	}
 }
 
-void Game::InitGame()
+void Game::InitGame(bool bFromMenu)
 {
 	Engine::Get().ClearImage(100, 100);
+
+	if (bFromMenu)
+	{
+		auto temp = mainLevel;
+		mainLevel = &*backLevel;
+		menuLevel = temp;
+	}
+	else
+	{
+		auto temp = mainLevel;
+		mainLevel = &*backLevel;
+		gameOverLevel = temp;
+	}
 
 	if (mainLevel != nullptr)
 	{
@@ -148,8 +154,28 @@ void Game::InitGame()
 	}
 
 	mainLevel = new MainLevel(CreateRandomMap());
-	mainLevel->bIsMainLevel = true;
+
 	player = mainLevel->As<MainLevel>()->player;
+
+	if (craftLevel)
+	{
+		delete craftLevel;
+	}
+
+	if (gameOverLevel)
+	{
+		delete gameOverLevel;
+	}
+
+	if (battleScene)
+	{
+		delete battleScene;
+	}
+
+	if (menuLevel)
+	{
+		delete menuLevel;
+	}
 
 	menuLevel = new MenuLevel();
 	craftLevel = new CraftLevel();
@@ -196,8 +222,6 @@ void Game::ToggleMenu()
 
 	bShowMenu = !bShowMenu;
 
-	mainLevel->bIsMainLevel = false;
-
 	if (bShowMenu)
 	{
 		backLevel = &*mainLevel;
@@ -208,19 +232,16 @@ void Game::ToggleMenu()
 		mainLevel = &*backLevel;
 	}
 
-	mainLevel->bIsMainLevel = true;
 }
 
 void Game::CraftMode()
 {
 	system("cls");
 
-	mainLevel->bIsMainLevel = false;
 
 	backLevel = &*mainLevel;
 	mainLevel = &*craftLevel;
 
-	mainLevel->bIsMainLevel = true;
 }
 
 void Game::SetMap()
@@ -241,7 +262,6 @@ void Game::SetMap()
 void Game::IntoBattleScene()
 {
 	system("cls");
-
 
 	backLevel = &*mainLevel;
 
