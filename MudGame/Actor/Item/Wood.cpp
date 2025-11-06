@@ -1,7 +1,7 @@
 ﻿#include "Wood.h"
 
 Wood::Wood(const char* name)
-	: Item("name")
+	: Item(name)
 {
 	itemType = ItemType::Wood;
 }

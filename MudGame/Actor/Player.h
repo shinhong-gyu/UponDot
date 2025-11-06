@@ -16,16 +16,9 @@ struct SlotStruct
 	Item* item = nullptr;
 	int quantity = 0;
 
-	
-
 	friend std::ostream& operator<<(std::ostream& os, const SlotStruct& s)
 	{
 		return os << (s.item ? s.item->GetName() : "NULL") << "\t" << s.quantity;
-	}
-
-	bool operator==(const SlotStruct& s)
-	{
-		return this->item == s.item && this->quantity == s.quantity;
 	}
 };
 

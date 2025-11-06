@@ -15,15 +15,16 @@
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	
+
 	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
 
 	std::wcout.imbue(std::locale("en_US.UTF-8"));
 
-	Game game;
-	game.LoadLevel(new MenuLevel());
-	game.Run();
+	Game* game = new Game();
+	game->LoadLevel(new MenuLevel());
+	game->Run();
 
+	delete game;
 
 	_CrtDumpMemoryLeaks();
 
