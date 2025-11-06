@@ -9,7 +9,6 @@ Meat::Meat(const char* name,Player* owner)
 
 Meat::~Meat()
 {
-	delete[] name;
 }
 
 void Meat::Use()

@@ -17,8 +17,6 @@ Game::Game()
 
 	SetCursorType(CursorType::NoCursor);
 
-	//InitGame(true);
-
 	loseImage.push_back(L"⣿⣿⣟⢿⣿⣿⡿⡿⣿⣿⡿⡻⡫⣿⣿⣿⣿⡻⣝⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⢟⣿⣿⣿⣿⣿⣿⣿⡇⠆⠕⢌⠪⡢⡹⡙⣟⢿");
 	loseImage.push_back(L"⣿⣿⣿⡪⢻⣿⡗⡕⣕⢕⡗⡝⣎⣿⣿⡿⡣⣳⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣎⡟⣿⣿⣿⣿⣿⣿⡑⢕⠱⡱⡸⡸⡸⡰⡹");
 	loseImage.push_back(L"⣿⣿⣿⣇⢣⢙⠇⡎⡪⡺⡜⡕⣱⠿⡋⣇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣕⢝⢿⣿⣿⣿⡏⢜⢸⢸⢸⢸⢱⢹⢸");
@@ -100,6 +98,21 @@ Game::Game()
 
 Game::~Game()
 {
+	if (mainLevel)
+	{
+		delete mainLevel;
+		mainLevel = nullptr;
+
+		if (bShowMenu)
+		{
+			menuLevel = nullptr;
+		}
+		else
+		{
+			gameOverLevel = nullptr;
+		}
+	}
+
 	if (battleScene)
 	{
 		delete battleScene;
@@ -118,10 +131,10 @@ Game::~Game()
 		gameOverLevel = nullptr;
 	}
 
-	if (mainLevel)
+	if (menuLevel)
 	{
-		delete mainLevel;
-		mainLevel = nullptr;
+		delete menuLevel;
+		menuLevel = nullptr;
 	}
 
 	if (backLevel)
@@ -151,6 +164,7 @@ void Game::InitGame(bool bFromMenu)
 	if (mainLevel != nullptr)
 	{
 		delete mainLevel;
+		mainLevel = nullptr;
 	}
 
 	mainLevel = new MainLevel(CreateRandomMap());
@@ -160,21 +174,25 @@ void Game::InitGame(bool bFromMenu)
 	if (craftLevel)
 	{
 		delete craftLevel;
+		craftLevel = nullptr;
 	}
 
 	if (gameOverLevel)
 	{
 		delete gameOverLevel;
+		gameOverLevel = nullptr;
 	}
 
 	if (battleScene)
 	{
 		delete battleScene;
+		battleScene = nullptr;
 	}
 
 	if (menuLevel)
 	{
 		delete menuLevel;
+		menuLevel = nullptr;
 	}
 
 	menuLevel = new MenuLevel();
@@ -224,12 +242,12 @@ void Game::ToggleMenu()
 
 	if (bShowMenu)
 	{
-		backLevel = &*mainLevel;
-		mainLevel = &*menuLevel;
+		backLevel = mainLevel;
+		mainLevel = menuLevel;
 	}
 	else
 	{
-		mainLevel = &*backLevel;
+		mainLevel = backLevel;
 	}
 
 }
@@ -238,10 +256,8 @@ void Game::CraftMode()
 {
 	system("cls");
 
-
-	backLevel = &*mainLevel;
-	mainLevel = &*craftLevel;
-
+	backLevel = mainLevel;
+	mainLevel = craftLevel;
 }
 
 void Game::SetMap()
@@ -263,14 +279,14 @@ void Game::IntoBattleScene()
 {
 	system("cls");
 
-	backLevel = &*mainLevel;
+	backLevel = mainLevel;
 
 	if (auto* bl = battleScene->As<BattleScene>())
 	{
 		bl->bIsExpired = false;
 	}
 
-	mainLevel = &*battleScene;
+	mainLevel = battleScene;
 
 }
 
@@ -283,7 +299,7 @@ void Game::BackToMainLevel()
 
 	if (backLevel->As<MainLevel>())
 	{
-		mainLevel = &*backLevel;
+		mainLevel = backLevel;
 	}
 
 	mainLevel->bIsMainLevel = true;
@@ -355,8 +371,8 @@ void Game::PrintRunImage()
 void Game::GameOver()
 {
 	system("cls");
-	mainLevel = &*gameOverLevel;
-	backLevel = &*mainLevel;
+	mainLevel = gameOverLevel;
+	backLevel = mainLevel;
 
 	SetConsoleOutputCP(CP_UTF8);
 	wcout << L"⡿⣿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⢿⢿⡿⡿⣿⣻\n";
@@ -378,8 +394,8 @@ void Game::GameOver()
 void Game::AliveSuccess()
 {
 	system("cls");
-	mainLevel = &*gameOverLevel;
-	backLevel = &*mainLevel;
+	mainLevel = gameOverLevel;
+	backLevel = mainLevel;
 
 	SetConsoleOutputCP(CP_UTF8);
 
