@@ -168,7 +168,7 @@ void Game::InitGame(bool bFromMenu)
 	}
 
 	mainLevel = new MainLevel(CreateRandomMap());
-
+	mainLevel->bIsMainLevel = true;
 	player = mainLevel->As<MainLevel>()->player;
 
 	if (craftLevel)
@@ -240,6 +240,8 @@ void Game::ToggleMenu()
 
 	bShowMenu = !bShowMenu;
 
+	mainLevel->bIsMainLevel = false;
+
 	if (bShowMenu)
 	{
 		backLevel = mainLevel;
@@ -250,14 +252,19 @@ void Game::ToggleMenu()
 		mainLevel = backLevel;
 	}
 
+	mainLevel->bIsMainLevel = true;
 }
 
 void Game::CraftMode()
 {
 	system("cls");
 
+	mainLevel->bIsMainLevel = false;
+
 	backLevel = mainLevel;
 	mainLevel = craftLevel;
+
+	mainLevel->bIsMainLevel = true;
 }
 
 void Game::SetMap()
@@ -279,6 +286,8 @@ void Game::IntoBattleScene()
 {
 	system("cls");
 
+	mainLevel->bIsMainLevel = false;
+
 	backLevel = mainLevel;
 
 	if (auto* bl = battleScene->As<BattleScene>())
@@ -288,6 +297,7 @@ void Game::IntoBattleScene()
 
 	mainLevel = battleScene;
 
+	mainLevel->bIsMainLevel = true;
 }
 
 void Game::BackToMainLevel()
@@ -296,12 +306,12 @@ void Game::BackToMainLevel()
 
 	system("cls");
 	Engine::Get().ClearInfoUI();
+	mainLevel->bIsMainLevel = false;
 
 	if (backLevel->As<MainLevel>())
 	{
 		mainLevel = backLevel;
 	}
-
 	mainLevel->bIsMainLevel = true;
 }
 
