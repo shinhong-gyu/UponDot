@@ -5,8 +5,10 @@ enum class ItemType :unsigned short
 {
 	Wood = 1,
 	Meat = 2,
-	Weapon = 3,
-	Medicine = 4,
+	WoodSword = 3,
+	Club = 4,
+	Weapon = 5,
+	Medicine = 6,
 };
 
 

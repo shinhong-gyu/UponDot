@@ -5,7 +5,7 @@ class Club : public Weapon
 {
 	RTTI_DECLARATIONS(Club, Weapon)
 public:
-	Club();
+	Club(const char* name);
 	virtual void Use() override;
 private:
 };

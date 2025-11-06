@@ -40,8 +40,7 @@ BattleScene::BattleScene()
 		}
 		else
 		{
-			Item* newItem = new Meat("고 기", Game::Get().player);
-			Game::Get().player->AddToInventory(newItem, 1);
+			Game::Get().player->AddToInventory(ItemType::Meat, 1);
 			Game::Get().PrintWinImage();
 		}
 		}));
@@ -81,7 +80,7 @@ void BattleScene::Update(float deltaTime)
 {
 	timer->Update(deltaTime);
 
-	weaponList = Game::Get().player->GetItemListByType(ItemType::Weapon);
+	weaponList = Game::Get().player->GetWeaponList();
 
 	if (Game::Get().GetKeyDown(VK_ESCAPE))
 	{

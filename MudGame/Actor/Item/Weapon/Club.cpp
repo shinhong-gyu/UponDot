@@ -3,10 +3,10 @@
 #include "Actor/Player.h"
 #include "Actor/Item/Meat.h"
 
-Club::Club()
+Club::Club(const char* name)
 	: Super("³ª¹« ¸ùµÕÀÌ")
 {
-	itemType = ItemType::Weapon;
+	itemType = ItemType::Club;
 }
 
 void Club::Use()
@@ -19,7 +19,7 @@ void Club::Use()
 	}
 	else
 	{
-		Game::Get().player->AddToInventory(new Meat("°í ±â", Game::Get().player), 1);
+		Game::Get().player->AddToInventory(ItemType::Meat, 1);
 		Game::Get().PrintWinImage();
 	}
 }

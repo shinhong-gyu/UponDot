@@ -6,7 +6,7 @@ class WoodSword : public Weapon
 {
 	RTTI_DECLARATIONS(WoodSword, Weapon)
 public:
-	WoodSword();
+	WoodSword(const char* name);
 	virtual void Use() override;
 private:
 };

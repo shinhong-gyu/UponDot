@@ -3,10 +3,10 @@
 #include "Actor/Player.h"
 #include "../Meat.h"
 
-WoodSword::WoodSword()
+WoodSword::WoodSword(const char* name)
 	: Weapon("목 검")
 {
-	itemType = ItemType::Weapon;
+	itemType = ItemType::WoodSword;
 }
 
 void WoodSword::Use()
@@ -19,7 +19,7 @@ void WoodSword::Use()
 	}
 	else
 	{
-		Game::Get().player->AddToInventory(new Meat("고 기", Game::Get().player), 1);
+		Game::Get().player->AddToInventory(ItemType::Meat, 1);
 		Game::Get().PrintWinImage();
 	}
 }

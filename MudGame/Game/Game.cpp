@@ -17,7 +17,7 @@ Game::Game()
 
 	SetCursorType(CursorType::NoCursor);
 
-	InitGame(true);
+	//InitGame(true);
 
 	loseImage.push_back(L"⣿⣿⣟⢿⣿⣿⡿⡿⣿⣿⡿⡻⡫⣿⣿⣿⣿⡻⣝⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⢟⣿⣿⣿⣿⣿⣿⣿⡇⠆⠕⢌⠪⡢⡹⡙⣟⢿");
 	loseImage.push_back(L"⣿⣿⣿⡪⢻⣿⡗⡕⣕⢕⡗⡝⣎⣿⣿⡿⡣⣳⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣎⡟⣿⣿⣿⣿⣿⣿⡑⢕⠱⡱⡸⡸⡸⡰⡹");
@@ -127,7 +127,7 @@ Game::~Game()
 	if (backLevel)
 	{
 		delete backLevel;
-		backLevel;
+		backLevel = nullptr;
 	}
 }
 

@@ -16,9 +16,16 @@ struct SlotStruct
 	Item* item = nullptr;
 	int quantity = 0;
 
+	
+
 	friend std::ostream& operator<<(std::ostream& os, const SlotStruct& s)
 	{
 		return os << (s.item ? s.item->GetName() : "NULL") << "\t" << s.quantity;
+	}
+
+	bool operator==(const SlotStruct& s)
+	{
+		return this->item == s.item && this->quantity == s.quantity;
 	}
 };
 
@@ -34,18 +41,20 @@ public:
 
 	virtual void Update(float deltaTime) override;
 
-	void AddToInventory(Item* item, int quantity);
+	void AddToInventory(ItemType type, int quantity);
 	void RemoveFromInventory(const char* name, int quantity);
 
 	bool SearchItemByType(ItemType type);
 
 	vector<Item*> GetItemListByType(ItemType type);
+	vector<Item*> GetWeaponList();
 
 	int GetQuantity(const char* name);
 
 	int GetHP() const { return hp; }
 	void SetHP(int value) { hp = value; }
 	int GetStarve() const { return starve; }
+
 	void SetStarve(int value)
 	{
 		starve = value;

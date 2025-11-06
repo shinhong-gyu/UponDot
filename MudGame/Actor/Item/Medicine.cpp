@@ -9,7 +9,6 @@ Medicine::Medicine(const char* name, Player* owner)
 
 Medicine::~Medicine()
 {
-	delete[] name;
 }
 
 void Medicine::Use()
