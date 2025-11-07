@@ -113,7 +113,6 @@ private:
 	void ReAllocate(int newCapacity)
 	{
 		T* newBlock = new T[newCapacity];
-		memset(newBlock, 0, sizeof(T) * newCapacity);
 
 		if (newCapacity < size)
 		{
