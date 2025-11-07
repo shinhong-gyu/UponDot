@@ -35,7 +35,7 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;
 private:
-	vector<Recipe*> recipeList;
+	List<Recipe*> recipeList;
 
 	int currentIndex = 0;
 
@@ -45,6 +45,7 @@ private:
 	bool bIsExpired = false;
 
 	Timer* timer = nullptr;
+
 	vector<wstring> clubImage;
 	vector<wstring> woodSwordImage;
 

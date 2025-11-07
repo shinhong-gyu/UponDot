@@ -61,7 +61,7 @@ CraftLevel::CraftLevel()
 	woodSwordImage.push_back(L"⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
 	woodSwordImage.push_back(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
 
-	recipeList.push_back(new Recipe("나무 몽둥이", []()
+	recipeList.PushBack(new Recipe("나무 몽둥이", []()
 		{
 			if (2 <= Game::Get().player->GetQuantity("목 재"))
 			{
@@ -86,7 +86,7 @@ CraftLevel::CraftLevel()
 			}
 		}
 	));
-	recipeList.push_back(new Recipe("목   검", []()
+	recipeList.PushBack(new Recipe("목   검", []()
 		{
 			if (4 <= Game::Get().player->GetQuantity("목 재"))
 			{
@@ -137,11 +137,11 @@ void CraftLevel::Update(float deltaTime)
 
 	if (Game::Get().GetKeyDown(VK_LEFT))
 	{
-		currentIndex = (currentIndex - 1 + (int)recipeList.size()) % (int)recipeList.size();
+		currentIndex = (currentIndex - 1 + (int)recipeList.Size()) % (int)recipeList.Size();
 	}
 	if (Game::Get().GetKeyDown(VK_RIGHT))
 	{
-		currentIndex = (currentIndex + 1) % (int)recipeList.size();
+		currentIndex = (currentIndex + 1) % (int)recipeList.Size();
 	}
 
 	if (Game::Get().GetKeyDown(VK_RETURN))

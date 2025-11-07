@@ -31,7 +31,7 @@ BattleScene::BattleScene()
 
 
 
-	selections.push_back(new Selection("맨손 격투(이길 확률 10%)", []() {
+	selections.PushBack(new Selection("맨손 격투(이길 확률 10%)", []() {
 		float randNo = RandomPercent(0, 1);
 		if (randNo >= 0.1)
 		{
@@ -44,7 +44,7 @@ BattleScene::BattleScene()
 			Game::Get().PrintWinImage();
 		}
 		}));
-	selections.push_back(new Selection("도망치기", []()
+	selections.PushBack(new Selection("도망치기", []()
 		{
 			Game::Get().PrintRunImage();
 			if (auto* battleL = dynamic_cast<BattleScene*>(Game::Get().GetLevel()))
@@ -95,22 +95,22 @@ void BattleScene::Update(float deltaTime)
 	{
 		if (bShowWeaponList)
 		{
-			currentWeaponIndex = (currentWeaponIndex - 1 + (int)weaponList.size()) % (int)weaponList.size();
+			currentWeaponIndex = (currentWeaponIndex - 1 + (int)weaponList.Size()) % (int)weaponList.Size();
 		}
 		else
 		{
-			currentIndex = (currentIndex - 1 + (int)selections.size()) % (int)selections.size();
+			currentIndex = (currentIndex - 1 + (int)selections.Size()) % (int)selections.Size();
 		}
 	}
 	if (Game::Get().GetKeyDown(VK_RIGHT))
 	{
 		if (bShowWeaponList)
 		{
-			currentWeaponIndex = (currentWeaponIndex + 1) % (int)weaponList.size();
+			currentWeaponIndex = (currentWeaponIndex + 1) % (int)weaponList.Size();
 		}
 		else
 		{
-			currentIndex = (currentIndex + 1) % (int)selections.size();
+			currentIndex = (currentIndex + 1) % (int)selections.Size();
 		}
 	}
 
@@ -153,7 +153,7 @@ void BattleScene::Update(float deltaTime)
 			}
 		}
 
-		selections.push_back(new Selection(("무기 사용"), []()
+		selections.PushBack(new Selection(("무기 사용"), []()
 			{
 				if (auto* battleL = dynamic_cast<BattleScene*>(Game::Get().GetLevel()))
 				{
@@ -197,7 +197,7 @@ void BattleScene::Draw()
 	if (!bShowWeaponList)
 	{
 		int count = 0;
-		for (int ix = 0; ix < selections.size(); ++ix)
+		for (int ix = 0; ix < selections.Size(); ++ix)
 		{
 			count++;
 			SetColor(ix == currentIndex ? selectedColor : unselectedColor);
@@ -212,7 +212,7 @@ void BattleScene::Draw()
 	}
 	else
 	{
-		for (int ix = 0; ix < weaponList.size(); ++ix)
+		for (int ix = 0; ix < weaponList.Size(); ++ix)
 		{
 			SetColor(ix == currentWeaponIndex ? selectedColor : unselectedColor);
 			cout << "\t" << weaponList[ix]->GetName() << "\t";

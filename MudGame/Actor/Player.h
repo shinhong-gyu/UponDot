@@ -39,8 +39,8 @@ public:
 
 	bool SearchItemByType(ItemType type);
 
-	vector<Item*> GetItemListByType(ItemType type);
-	vector<Item*> GetWeaponList();
+	List<Item*> GetItemListByType(ItemType type);
+	List<Item*> GetWeaponList();
 
 	int GetQuantity(const char* name);
 
@@ -57,7 +57,7 @@ public:
 	}
 
 private:
-	vector<SlotStruct> inventory;
+	List<SlotStruct> inventory;
 
 	int hp = 8;
 	int	starve = 8;

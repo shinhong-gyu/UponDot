@@ -32,7 +32,7 @@ public:
 protected:
 
 	// 게임 공간에 배치되는 물체(액터) 배열
-	vector<Actor*> actors;
+	List<Actor*> actors;
 
 	// 추가 요청된 액터
 	Actor* addRequestedActor = nullptr;

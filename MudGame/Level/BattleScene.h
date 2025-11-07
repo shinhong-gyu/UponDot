@@ -6,6 +6,8 @@
 
 using namespace std;
 
+class Item;
+
 struct Selection
 {
 	using OnSelected = void (*)();
@@ -56,8 +58,8 @@ private:
 	bool bShowWeaponList= false;
 	bool bOnce = false;
 
-	vector<Selection*> selections;
+	List<Selection*> selections;
 
-	vector<class Item*> weaponList;
+	List<Item*> weaponList;
 
 };

@@ -46,6 +46,11 @@ public:
 		size++;
 	}
 
+	void Clear()
+	{
+		size = 0;
+	}
+
 	void Erase(int index)
 	{
 		// 예외 처리.
@@ -107,10 +112,6 @@ public:
 private:
 	void ReAllocate(int newCapacity)
 	{
-		// 1. allocate a new block of memory.
-		// 2. copy/move old elements into new block.
-		// 3. delete.
-
 		T* newBlock = new T[newCapacity];
 		memset(newBlock, 0, sizeof(T) * newCapacity);
 
@@ -119,12 +120,10 @@ private:
 			size = newCapacity;
 		}
 
-		memcpy(newBlock, data, sizeof(T) * capacity);
-		//for (int ix = 0; ix < size; ++ix)
-		//{
-		//	// newBlock[ix] = data[ix];
-		//	newBlock[ix] = std::move(data[ix]);
-		//}
+		for (int ix = 0; ix < size; ++ix)
+		{
+			newBlock[ix] = std::move(data[ix]);
+		}
 
 		delete[] data;
 		data = newBlock;

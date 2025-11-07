@@ -16,7 +16,8 @@ Level::~Level()
 			delete actor;
 		}
 	}
-	actors.clear();
+
+	actors.Clear();
 
 	// 추가 요청된 액터 정리
 	if (addRequestedActor != nullptr)
@@ -60,13 +61,13 @@ void Level::AddActor(Actor* newActor)
 void Level::ProcessAddedAndDestroyActor()
 {
 	// 액터 순회 후 삭제 요청된 액터를 처리.	
-	for (int i = 0; i < actors.size();)
+	for (int i = 0; i < actors.Size();)
 	{
 		if (actors[i]->isExpired == true)
 		{
 			delete actors[i];
 			actors[i] = nullptr;
-			actors.erase(actors.begin()+i);
+			actors.Erase(i);
 			continue;
 		}
 		++i;
@@ -75,7 +76,7 @@ void Level::ProcessAddedAndDestroyActor()
 	// 추가 요청된 액터 처리
 	if (addRequestedActor != nullptr)
 	{
-		actors.push_back(addRequestedActor);
+		actors.PushBack(addRequestedActor);
 		addRequestedActor = nullptr;
 	}
 }
