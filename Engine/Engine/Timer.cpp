@@ -9,7 +9,9 @@ Timer::Timer(float targetTime)
 void Timer::Update(float deltaTime)
 {
 	if (bActive)
+	{
 		elapsedTime += deltaTime;
+	}	
 }
 
 void Timer::Reset()

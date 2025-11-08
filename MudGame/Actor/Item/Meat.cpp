@@ -13,10 +13,16 @@ Meat::~Meat()
 
 void Meat::Use()
 {
+	Engine::Get().ClearInfoUI();
 
 	Engine::Get().SetCursorPosition(Vector2(14, 0));
 
 	SetColor(Color::White);
+
+	if (auto* level = Engine::Get().GetLevel()->As<MainLevel>())
+	{
+		level->InfoMessageUpdated();
+	}
 
 	Log("고기를 먹었다 (포만감 +1).");
 

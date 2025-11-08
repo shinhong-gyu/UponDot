@@ -1,6 +1,6 @@
 #pragma once
 
-// @refactor : 경고를 일부러 무시 시켰기 때문에 문제가 된다면 고쳐야 함.
+// 경고를 일부러 무시 시켰기 때문에 문제가 된다면 고쳐야 함.
 #pragma warning (disable : 4172)
 
 #include "Core.h"

@@ -199,20 +199,17 @@ GameOverLevel::~GameOverLevel()
 	{
 		if (item)
 		{
-			delete item;
-			item = nullptr;
+			SafeDelete(item);
 		}
 	}
 
 	if (timer)
 	{
-		delete timer;
-		timer = nullptr;
+		SafeDelete(timer);
 	}
 	if (animTimer)
 	{
-		delete animTimer;
-		animTimer = nullptr;
+		SafeDelete(animTimer);
 	}
 }
 

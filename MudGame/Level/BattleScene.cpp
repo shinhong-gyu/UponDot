@@ -64,15 +64,13 @@ BattleScene::~BattleScene()
 	{
 		if (selection)
 		{
-			delete selection;
-			selection = nullptr;
+			SafeDelete(selection);
 		}
 	}
 
 	if (timer)
 	{
-		delete timer;
-		timer = nullptr;
+		SafeDelete(timer);
 	}
 }
 
@@ -116,7 +114,10 @@ void BattleScene::Update(float deltaTime)
 
 	if (Game::Get().GetKeyDown(VK_RETURN))
 	{
-		if (bIsExpired) return;
+		if (bIsExpired)
+		{
+			return;
+		}
 
 		if (bShowWeaponList)
 		{

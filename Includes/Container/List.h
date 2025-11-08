@@ -16,12 +16,73 @@ public:
 		memset(data, 0, sizeof(T) * capacity);
 	}
 
+	List(List&& other) noexcept
+		: data(other.data), size(other.size), capacity(other.capacity)
+	{
+		other.data = nullptr;
+		other.size = 0;
+		other.capacity = 0;
+	}
+
 	~List()
 	{
 		if (data != nullptr)
 		{
 			delete[] data;
 		}
+	}
+
+	List<T>& operator=(List&& other) noexcept
+	{
+		if (this != &other)
+		{
+			if (data != nullptr)
+			{
+				delete[] data;
+			}
+
+			data = other.data;
+			size = other.size;
+			capacity = other.capacity;
+
+			other.data = nullptr;
+			other.size = 0;
+			other.capacity = 0;
+		}
+		return *this;
+	}
+
+	List(const List& other)
+		: capacity(other.capacity), size(other.size)
+	{
+		// 새로운 메모리 블록 할당
+		data = new T[capacity];
+		// 데이터 복사
+		for (int ix = 0; ix < size; ++ix)
+		{
+			data[ix] = other.data[ix];
+		}
+	}
+
+	List& operator=(const List& other)
+	{
+		if (this != &other)
+		{
+			if (data != nullptr)
+			{
+				delete[] data;
+			}
+
+			capacity = other.capacity;
+			size = other.size;
+			data = new T[capacity];
+
+			for (int ix = 0; ix < size; ++ix)
+			{
+				data[ix] = other.data[ix];
+			}
+		}
+		return *this;
 	}
 
 	void PushBack(const T& value)
@@ -113,8 +174,6 @@ private:
 	void ReAllocate(int newCapacity)
 	{
 		T* newBlock = new T[newCapacity];
-		
-		//memset(newBlock, 0, sizeof(T) * newCapacity);
 
 		if (newCapacity < size)
 		{

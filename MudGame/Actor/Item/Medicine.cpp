@@ -13,12 +13,20 @@ Medicine::~Medicine()
 
 void Medicine::Use()
 {
+	Engine::Get().ClearInfoUI();
+
 	Engine::Get().SetCursorPosition(Vector2(14, 0));
-	
+
 	SetColor(Color::White);
 
 	Log("치료제를 먹었다 (체력+1).");
-	
+
+	if (auto* level = Engine::Get().GetLevel()->As<MainLevel>())
+	{
+		level->InfoMessageUpdated();
+
+	}
+
 	owner->SetHP(owner->GetHP() + 1);
 	owner->RemoveFromInventory("치료제", 1);
 }

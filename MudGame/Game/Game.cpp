@@ -100,8 +100,7 @@ Game::~Game()
 {
 	if (mainLevel)
 	{
-		delete mainLevel;
-		mainLevel = nullptr;
+		SafeDelete(mainLevel);
 
 		if (bShowMenu)
 		{
@@ -115,32 +114,27 @@ Game::~Game()
 
 	if (battleScene)
 	{
-		delete battleScene;
-		battleScene = nullptr;
+		SafeDelete(battleScene);
 	}
 
 	if (craftLevel)
 	{
-		delete craftLevel;
-		craftLevel = nullptr;
+		SafeDelete(craftLevel);
 	}
 
 	if (gameOverLevel)
 	{
-		delete gameOverLevel;
-		gameOverLevel = nullptr;
+		SafeDelete(gameOverLevel);
 	}
 
 	if (menuLevel)
 	{
-		delete menuLevel;
-		menuLevel = nullptr;
+		SafeDelete(menuLevel);
 	}
 
 	if (backLevel)
 	{
-		delete backLevel;
-		backLevel = nullptr;
+		SafeDelete(backLevel);
 	}
 }
 
@@ -163,8 +157,7 @@ void Game::InitGame(bool bFromMenu)
 
 	if (mainLevel != nullptr)
 	{
-		delete mainLevel;
-		mainLevel = nullptr;
+		SafeDelete(mainLevel);
 	}
 
 	mainLevel = new MainLevel(CreateRandomMap());
@@ -173,26 +166,22 @@ void Game::InitGame(bool bFromMenu)
 
 	if (craftLevel)
 	{
-		delete craftLevel;
-		craftLevel = nullptr;
+		SafeDelete(craftLevel);
 	}
 
 	if (gameOverLevel)
 	{
-		delete gameOverLevel;
-		gameOverLevel = nullptr;
+		SafeDelete(gameOverLevel);
 	}
 
 	if (battleScene)
 	{
-		delete battleScene;
-		battleScene = nullptr;
+		SafeDelete(battleScene);
 	}
 
 	if (menuLevel)
 	{
-		delete menuLevel;
-		menuLevel = nullptr;
+		SafeDelete(menuLevel);
 	}
 
 	menuLevel = new MenuLevel();
@@ -269,7 +258,7 @@ void Game::CraftMode()
 
 void Game::SetMap()
 {
-	if (mainLevel == nullptr)
+	/*if (mainLevel == nullptr)
 	{
 		mainLevel = new MainLevel(CreateRandomMap());
 	}
@@ -279,7 +268,7 @@ void Game::SetMap()
 		{
 			mainL->SetMap(CreateRandomMap());
 		}
-	}
+	}*/
 }
 
 void Game::IntoBattleScene()

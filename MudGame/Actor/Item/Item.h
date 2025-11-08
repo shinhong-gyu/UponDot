@@ -14,9 +14,9 @@ enum class ItemType :unsigned short
 
 class Player;
 
-class Item : public DrawableActor
+class Item : public Actor
 {
-	RTTI_DECLARATIONS(Item, DrawableActor)
+	RTTI_DECLARATIONS(Item, Actor)
 public:
 	Item(const char* name, Player* value = nullptr);
 	virtual ~Item();

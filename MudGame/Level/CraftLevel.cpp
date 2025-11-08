@@ -114,12 +114,11 @@ CraftLevel::CraftLevel()
 
 CraftLevel::~CraftLevel()
 {
-	delete timer;
-	timer = nullptr;
+	SafeDelete(timer);
 
 	for (auto recipe : recipeList)
 	{
-		delete recipe;
+		SafeDelete(recipe);
 	}
 }
 
